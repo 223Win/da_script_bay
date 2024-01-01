@@ -1,0 +1,310 @@
+local PlayerMax = 1
+local PlayerConnection = game.Players.PlayerAdded
+local FastMode = false
+
+
+-- AntiKick test
+
+function Rejoin()
+	local JobId = game.JobId 
+	local PlaceId = game.PlaceId
+	game.Players.LocalPlayer:Kick("\nRejoining...")
+	wait()
+	game:GetService("TeleportService"):Teleport(PlaceId, game.Players.LocalPlayer,{'AUTO_REJOIN_ELITE','ELITE_MILITARY_MAIN','ID:%%#@'})
+end
+
+function HookKick()
+	game:GetService("GuiService").ErrorMessageChanged:Connect(function()
+		Rejoin()
+	end)
+	game.Players.PlayerRemoving:Connect(function(plr)
+		if plr.UserId == game.Players.LocalPlayer.UserId then
+			Rejoin()
+		end
+	end)
+	game.Players.LocalPlayer.PlayerScripts.Destroying:Connect(function()
+		Rejoin()
+	end)
+end
+
+HookKick()
+
+function CheckFastMode()
+	if #game:GetService("Players"):GetPlayers() == 1 then
+		FastMode = true
+	else
+		FastMode = false
+	end
+end
+
+
+PlayerConnection:Connect(CheckFastMode)
+
+--make sure this dont enable infront of people :skull: --
+
+if game:GetService("TeleportService"):GetLocalPlayerTeleportData() == nil or  table.concat(game:GetService("TeleportService"):GetLocalPlayerTeleportData(),'/') == table.concat({'AUTO_REJOIN_ELITE','ELITE_MILITARY_MAIN','ID:%%#@'},'/') then
+	local StartVal = nil
+	local Call_OBJ = Instance.new('BindableFunction')
+	game:GetService("StarterGui"):SetCore('SendNotification',{
+		Title = 'Execute Script',
+		Text = 'Would you like to execute the grinder?',
+		Duration = 1e9,
+		Button1 = 'Yes',
+		Button2 = 'No',
+		Callback = Call_OBJ
+	})
+
+	Call_OBJ.OnInvoke = function(value)
+		if value == 'Yes' then
+			StartVal = true
+		else
+			StartVal = false
+		end
+	end
+	repeat wait() until StartVal ~= nil
+	
+	if StartVal == false then
+		return
+	else
+		warn("Starting Main Script")
+	end
+end
+
+-- Checks to make sure Player isnt in the main menu
+
+function CheckIfInCountryMenu():boolean
+	return game.Players.LocalPlayer.PlayerGui.MainMenu.SelectMenu.Visible
+end
+
+function Pick_Country()
+	local selectmenu = game.Players.LocalPlayer.PlayerGui.MainMenu.SelectMenu
+	local flagframe = selectmenu.FlagFrame
+	local selectionframe = flagframe.FlagSelectionFrame
+	local List = selectionframe.List
+
+	local args = {
+		[1] = List:FindFirstChildOfClass('TextButton').Name
+	}
+
+	game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.5.1").knit.Services.TycoonService.RF.Select:InvokeServer(unpack(args))
+
+end
+
+function GetEliteMissionMenu(MissionId:number)
+	local Player = game.Players.LocalPlayer
+	local PlayerGUI = Player.PlayerGui
+	local EliteMissionMain = PlayerGUI.EliteMissionsMenu
+	local EliteMissionGUI = EliteMissionMain.Menu.Missions:FindFirstChildOfClass('ScrollingFrame'):FindFirstChild(tostring(MissionId))
+	return EliteMissionGUI
+end
+
+function CheckIfMissionIsOnCooldown(MissionId:number):boolean
+	local mission = GetEliteMissionMenu(MissionId)
+	local OnCooldown:boolean = mission:FindFirstChildOfClass('Frame').Visible
+	return OnCooldown
+end
+
+function GetCooldownTypeAndTime(MissionId:number)
+	
+	local CooldownChecks = {
+		'ON COOLDOWN',
+		'IN PROGRESS'
+	}
+	
+	local mission = GetEliteMissionMenu(MissionId)
+	local cooldownframe = mission:FindFirstChildOfClass('Frame')
+	if cooldownframe.Visible then
+		return true
+	end
+	local TimerLabel:TextLabel = cooldownframe.TimeLabel
+	for i,v in pairs(CooldownChecks) do
+		if #TimerLabel.Text:split(v) > 1 then
+			if i == 1 then
+				return TimerLabel.Text:split('ON COOLDOWN (')[2]:split(')')[1]
+			else
+				return false
+			end
+		end
+	end
+end
+
+
+-- check to make sure you aint in the main menu
+
+if CheckIfInCountryMenu() == true then
+	Pick_Country()
+end
+CheckFastMode()
+
+warn('WAITING FOR GAME TO LOAD')
+wait(5)
+repeat wait() until game:IsLoaded() == true
+warn("Game loaded checks completed; begining grinder")
+
+function Complete_Mission()
+	repeat wait() until CheckIfMissionIsOnCooldown(3) == false
+	local args = {
+		[1] = 3,
+		[2] = "Hard"
+	}	
+
+	game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.5.1").knit.Services.MissionService.RF.Join:InvokeServer(unpack(args))
+
+	-- Elite Mission Main Script
+
+	repeat wait() until CheckIfMissionIsOnCooldown(3) == true
+	wait(5)
+	warn('Starting Elite Mission')
+
+	local fp = fireproximityprompt
+	local GetMission = function()
+		local CurrentMission = Workspace.Mission
+		return CurrentMission
+	end
+	local CheckForExplosiveSniper = function()
+		local Char = game.Players.LocalPlayer.Character
+		local Backpack = game.Players.LocalPlayer.Backpack
+		local ID = "Explosive Sniper"
+		local ID_Exists = (Char:FindFirstChild(ID) ~= nil or Backpack:FindFirstChild(ID) ~= nil)
+
+		return ID_Exists
+	end
+	local GetRPG = function()
+		fp(workspace.EliteMission3.Build.Model.weapon_crate_lid.ProximityPrompt)
+	end
+
+
+
+	local GetBoss = function()
+		local Boss = game:FindFirstChild('BossHelicopter',true)
+		return Boss
+	end
+	local BreachDoor = function(Stage:number)
+		local Mission = GetMission()
+		local Stages = Mission.Stages
+		local Door = Stages[tostring(Stage)].C4DoorNew
+		local prox = Door.C4.ProximityPrompt
+		fp(prox)
+	end
+
+	local tp = function (...)
+		local VectorParams = {...}
+		local TS = game:GetService("TweenService")
+		local Player = game.Players.LocalPlayer
+		local Character = Player.Character
+		if Character then
+			local info = TweenInfo.new(3,Enum.EasingStyle.Linear)
+			local goal = {CFrame = CFrame.new(VectorParams[1],VectorParams[2],VectorParams[3])}
+			local error,tween = pcall(function()
+				return TS:Create(Character.HumanoidRootPart,info,goal)
+			end)
+			if error == true then
+				Character.Torso.Anchored = false
+				tween:Play()
+				tween.Completed:Wait()
+				Character.Torso.Anchored = true
+			else
+				return tween
+			end
+		end
+	end
+
+	local SniperExists = CheckForExplosiveSniper()
+
+	warn('Running Main Script')
+
+
+	tp(-2499.968994140625, 306.2042236328125, 7209.6298828125)
+	BreachDoor(1)
+	tp(-2366.9326171875, 306.2058410644531, 7208.130859375)
+	BreachDoor(2)
+	tp(-2141.969482421875, 306.21197509765625, 7210.00244140625)
+	BreachDoor(3)
+	tp(-2020.2005615234375, 309.6351318359375, 7200.3408203125)
+	GetRPG()
+	tp(-2088.9873046875, 306.2136535644531, 7198.90185546875)
+	game.Players.LocalPlayer.Character.Torso.Anchored = false
+
+
+
+	local Health = GetBoss().VehicleHealth.Value
+	local Body:MeshPart = GetBoss().Body
+	local BodyParts = GetBoss().VehicleParts
+
+	local function EquipRPG()
+		local RPG:Tool = game.Players.LocalPlayer.Backpack:FindFirstChild("RPG")
+		if RPG then
+			RPG.Parent = game.Players.LocalPlayer.Character
+		else
+			warn('NO RPG')
+		end
+	end
+
+	local function EquipSniper()
+		local SNIPER:Tool = game.Players.LocalPlayer.Backpack:FindFirstChild("Explosive Sniper")
+		if SNIPER then
+			SNIPER.Parent = game.Players.LocalPlayer.Character
+		else
+			warn("Cannot find Sniper in Inventory Most likely equipped")
+		end
+	end
+
+	local function Main_Equip()
+		if SniperExists then
+			EquipSniper()
+		else
+			EquipRPG()
+		end
+	end
+
+
+	local function Attack()
+		if SniperExists then
+			local SniperPos = Vector3.new(-2051.103759765625, 306.8470153808594, 7218.2216796875)
+			local Target = GetBoss().Body.Position
+			local args = {
+				[1] = {SniperPos},
+				[2] = {Target},
+				[3] = {GetBoss().Body},
+				[4] = {Target},
+				[5] = {Vector3.new(-0.9868752956390381, 0, 0.1614837646484375)},
+				[6] = {Enum.Material.Plastic}
+			}
+			game:GetService("ReplicatedStorage").Events.ShootEvent:FireServer(unpack(args))
+			game:GetService("ReplicatedStorage").Events.ReloadEvent:FireServer()
+			wait(3.55)
+		else
+			local Target = GetBoss().Body.Position
+			local args = {
+				[1] = CFrame.new(Target.X,Target.Y,Target.Z) * CFrame.Angles(-0, 0, -0)
+			}
+
+			game:GetService("ReplicatedStorage").Events.RPG:FireServer(unpack(args))
+			game:GetService("ReplicatedStorage").Events.RPGReload:FireServer()
+			wait(3.1)
+		end
+	end
+	Main_Equip()
+	wait(10)
+	repeat Attack() until GetBoss().Parent.Parent.Parent.Name == 'ReplicatedStorage'
+
+	tp(-1901.6082763671875, 306.2123107910156, 7208.41064453125)
+	BreachDoor(5)
+	tp(-1680.5286865234375, 306.17913818359375, 7208.6513671875)
+	BreachDoor(6)
+	tp(-1836.7493896484375, 306.1868896484375, 7209.41259765625)
+	game.Players.LocalPlayer.Character.Torso.Anchored = false
+	wait(20)
+end
+
+while true do
+	warn("Fast Mode Status: ",FastMode)
+	if FastMode == true then
+		Complete_Mission()
+		wait(5)
+		warn("rejoining")
+		Rejoin()
+	else
+		Complete_Mission()
+	end
+end

@@ -1,3 +1,6 @@
+
+-- loadstring(game:HttpGet('https://raw.githubusercontent.com/223Win/da_script_bay/main/MILITARY_TYCOON/AutoFarmDefeatethegigachad.lua'))
+
 local PlayerMax = 1
 local PlayerConnection = game.Players.PlayerAdded
 local FastMode = false
@@ -42,7 +45,7 @@ PlayerConnection:Connect(CheckFastMode)
 
 --make sure this dont enable infront of people :skull: --
 
-if game:GetService("TeleportService"):GetLocalPlayerTeleportData() == nil or  table.concat(game:GetService("TeleportService"):GetLocalPlayerTeleportData(),'/') == table.concat({'AUTO_REJOIN_ELITE','ELITE_MILITARY_MAIN','ID:%%#@'},'/') then
+if game:GetService("TeleportService"):GetLocalPlayerTeleportData() == nil or  table.concat(game:GetService("TeleportService"):GetLocalPlayerTeleportData(),'/') ~= table.concat({'AUTO_REJOIN_ELITE','ELITE_MILITARY_MAIN','ID:%%#@'},'/') then
 	local StartVal = nil
 	local Call_OBJ = Instance.new('BindableFunction')
 	game:GetService("StarterGui"):SetCore('SendNotification',{

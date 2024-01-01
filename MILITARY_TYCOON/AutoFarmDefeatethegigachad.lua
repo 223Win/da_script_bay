@@ -1,8 +1,14 @@
 
 -- loadstring(game:HttpGet('https://raw.githubusercontent.com/223Win/da_script_bay/main/MILITARY_TYCOON/AutoFarmDefeatethegigachad.lua'))
 
+if game.PlaceId ~= 7180042682 then return end
+
+-- writefile('militarytycoonautoelitemissions.lua',game:HttpGet('https://raw.githubusercontent.com/223Win/da_script_bay/main/MILITARY_TYCOON/AutoFarmDefeatethegigachad.lua'))
+
 local PlayerMax = 1
-local PlayerConnection = game.Players.PlayerAdded
+local BossAlive = true
+local PlayerConnectionAdd = game.Players.PlayerAdded
+local PlayerConnectionRem = game.Players.PlayerRemoving
 local FastMode = false
 
 
@@ -17,9 +23,6 @@ function Rejoin()
 end
 
 function HookKick()
-	game:GetService("GuiService").ErrorMessageChanged:Connect(function()
-		Rejoin()
-	end)
 	game.Players.PlayerRemoving:Connect(function(plr)
 		if plr.UserId == game.Players.LocalPlayer.UserId then
 			Rejoin()
@@ -41,7 +44,8 @@ function CheckFastMode()
 end
 
 
-PlayerConnection:Connect(CheckFastMode)
+PlayerConnectionAdd:Connect(CheckFastMode)
+PlayerConnectionRem:Connect(CheckFastMode)
 
 --make sure this dont enable infront of people :skull: --
 
@@ -65,7 +69,7 @@ if game:GetService("TeleportService"):GetLocalPlayerTeleportData() == nil or  ta
 		end
 	end
 	repeat wait() until StartVal ~= nil
-	
+
 	if StartVal == false then
 		return
 	else
@@ -108,12 +112,12 @@ function CheckIfMissionIsOnCooldown(MissionId:number):boolean
 end
 
 function GetCooldownTypeAndTime(MissionId:number)
-	
+
 	local CooldownChecks = {
 		'ON COOLDOWN',
 		'IN PROGRESS'
 	}
-	
+
 	local mission = GetEliteMissionMenu(MissionId)
 	local cooldownframe = mission:FindFirstChildOfClass('Frame')
 	if cooldownframe.Visible then
@@ -130,7 +134,17 @@ function GetCooldownTypeAndTime(MissionId:number)
 		end
 	end
 end
+local GetBoss = function()
+	local Boss = game:FindFirstChild('BossHelicopter',true)
+	return Boss
+end
 
+coroutine.wrap(function()
+	while true do
+		task.wait()
+		BossAlive = (GetBoss().Parent.Parent.Parent.Name ~= 'ReplicatedStorage')
+	end
+end)()
 
 -- check to make sure you aint in the main menu
 
@@ -178,10 +192,6 @@ function Complete_Mission()
 
 
 
-	local GetBoss = function()
-		local Boss = game:FindFirstChild('BossHelicopter',true)
-		return Boss
-	end
 	local BreachDoor = function(Stage:number)
 		local Mission = GetMission()
 		local Stages = Mission.Stages
@@ -288,8 +298,8 @@ function Complete_Mission()
 		end
 	end
 	Main_Equip()
-	wait(10)
-	repeat Attack() until GetBoss().Parent.Parent.Parent.Name == 'ReplicatedStorage'
+	repeat wait() until BossAlive == true
+	repeat Attack() until BossAlive == false
 
 	tp(-1901.6082763671875, 306.2123107910156, 7208.41064453125)
 	BreachDoor(5)

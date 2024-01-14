@@ -50,7 +50,6 @@ for i,v in pairs(MoneyFolder:GetChildren()) do
 	end
 end
 
-GRE.Size = Vector3.new(30,30,30)
 GRE.Position = MainClaimPos
 
 function Claim(Main:Part)

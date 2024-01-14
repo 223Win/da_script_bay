@@ -2,6 +2,7 @@
 
 -- Season Grinder for military Tycoon. Used to grind the heck out of the season pass and complete it as fast as possible.
 
+warn('Season Grinder Loaded')
 
 wait(5)
 local TS = game:GetService("TweenService")

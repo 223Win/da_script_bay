@@ -23,6 +23,7 @@ function Teleport(Speed,...)
 end
 
 local fp = fireproximityprompt
+local fti = firetouchinterest
 assert(fp,'does not have env functions')
 
 
@@ -55,12 +56,15 @@ GRE.Position = MainClaimPos
 function Claim(Main:Part)
 	Teleport(1,Main.Position.X,Main.Position.Y,Main.Position.Z)
 	fp(Main.HackAttachment.ProximityPrompt)
-	task.wait(2.5)
-	Teleport(1.75,MainClaimPos.X,MainClaimPos.Y,MainClaimPos.Z)
+
+	fti(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,Main,0)
+	task.wait(0.2)
+	fti(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,Main,1)
 	
 end
 
 
 for i,v:Part in pairs(Moneys) do
+	task.wait(1)
 	repeat Claim(v) until v.Parent == nil
 end

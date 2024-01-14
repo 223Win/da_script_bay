@@ -56,9 +56,9 @@ local Gems = {}
 
 for i,v in pairs(MoneyFolder:GetChildren()) do
 	task.wait()
-	if v.Name == 'MoneyPallet' then
+	if v.Name == 'MoneyPallet' and v.Main then
 		table.insert(Moneys,v.Main)
-	elseif v.Name == 'GemBag' then
+	elseif v.Name == 'GemBag' and v.Main then
 		table.insert(Gems,v.Main)
 	end
 end
@@ -67,7 +67,7 @@ for i,v:Instance in pairs(bankmodel:GetChildren()) do
 	task.wait()
 	for i,v in pairs(v:GetChildren()) do
 		task.wait()
-		if v.Enabled:FindFirstChild('HackAttachment') then
+		if v.Name == 'Safe' and v.Enabled:FindFirstChild('HackAttachment') then
 			table.insert(Vaults,v.Enabled)
 		end
 	end

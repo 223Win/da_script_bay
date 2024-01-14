@@ -1,5 +1,10 @@
 --!nocheck
 
+
+-- Raid the vault in a way so you can get the maximum amount of points
+
+
+
 warn("Loaded Season Grinder")
 
 task.wait(5)
@@ -46,30 +51,57 @@ local GRE:Part = Bank.Claim
 local MoneyFolder = bankmission.Money
 
 local Moneys = {}
+local Vaults = {}
 local Gems = {}
 
 for i,v in pairs(MoneyFolder:GetChildren()) do
+	task.wait()
 	if v.Name == 'MoneyPallet' then
 		table.insert(Moneys,v.Main)
 	elseif v.Name == 'GemBag' then
 		table.insert(Gems,v.Main)
 	end
 end
-
+task.wait()
+for i,v:Instance in pairs(bankmodel:GetChildren()) do
+	task.wait()
+	for i,v in pairs(v:GetChildren()) do
+		task.wait()
+		if v.Enabled:FindFirstChild('HackAttachment') then
+			table.insert(Vaults,v.Enabled)
+		end
+	end
+end
+task.wait()
 GRE.Position = MainClaimPos
 
 function Claim(Main:Part)
 	Teleport(1,Main.Position.X,Main.Position.Y,Main.Position.Z)
 	fp(Main.HackAttachment.ProximityPrompt)
-	task.wait(2.5)
+	task.wait(4.3)
 	Teleport(1,MainClaimPos.X,MainClaimPos.Y,MainClaimPos.Z)
 	
 end
 
+task.wait()
 
 for i,v:Part in pairs(Moneys) do
-	task.wait(1)
+	task.wait(0.3)
 	repeat 
 		Claim(v) 
 	until v.Parent == nil
+end
+
+task.wait()
+
+for i,v in pairs(Gems) do
+	task.wait(0.3)
+	Claim(v)
+end
+
+task.wait()
+
+for i,v in pairs(Vaults) do
+	task.wait(0.3)
+	Claim(v)
 end

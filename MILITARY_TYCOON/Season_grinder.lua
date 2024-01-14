@@ -59,10 +59,11 @@ Claim.Position = MainClaimPos
 Claim.Size = Vector3.new(20,20,20)
 
 function Claim(Main:Part)
-	Teleport(1,Main.Position.X,Main.Position.Y,Main.Position.Z)
-	fp(Main.HackAttachment.ProximityPrompt)
-	Teleport(1,MainClaimPos.X,MainClaimPos.Y,MainClaimPos.Z)
-	
+	pcall(function()
+		Teleport(1,Main.Position.X,Main.Position.Y,Main.Position.Z)
+		fp(Main.HackAttachment.ProximityPrompt)
+		Teleport(1,MainClaimPos.X,MainClaimPos.Y,MainClaimPos.Z)
+	end)
 end
 
 

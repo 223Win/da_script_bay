@@ -75,6 +75,11 @@ end
 task.wait()
 GRE.Position = MainClaimPos
 
+function FastClaim(Main:Part)
+	Teleport(1,Main.Position.X,Main.Position.Y,Main.Position.Z)
+	fp(Main.HackAttachment.ProximityPrompt)
+end
+
 function Claim(Main:Part)
 	Teleport(1,Main.Position.X,Main.Position.Y,Main.Position.Z)
 	fp(Main.HackAttachment.ProximityPrompt)
@@ -96,7 +101,7 @@ task.wait()
 
 for i,v in pairs(Gems) do
 	task.wait(0.3)
-	Claim(v)
+	FastClaim(v)
 end
 
 task.wait()

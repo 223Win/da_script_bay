@@ -1,4 +1,7 @@
 --!nocheck
+
+-- Season Grinder for military Tycoon. Used to grind the heck out of the season pass and complete it as fast as possible.
+
 local TS = game:GetService("TweenService")
 local Player = game.Players.LocalPlayer
 

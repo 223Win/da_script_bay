@@ -2,6 +2,8 @@
 
 -- Season Grinder for military Tycoon. Used to grind the heck out of the season pass and complete it as fast as possible.
 
+
+wait(5)
 local TS = game:GetService("TweenService")
 local Player = game.Players.LocalPlayer
 
@@ -53,7 +55,6 @@ for i,v in pairs(MoneyFolder:GetChildren()) do
 end
 
 Claim.Position = MainClaimPos
-Claim.Size = Vector3.new(20,20,20)
 
 function Claim(Main:Part)
 	Teleport(1,Main.Position.X,Main.Position.Y,Main.Position.Z)
@@ -64,5 +65,6 @@ end
 
 
 for i,v:Part in pairs(Moneys) do
+	wait(0.5)
 	repeat Claim(v) until v == nil
 end

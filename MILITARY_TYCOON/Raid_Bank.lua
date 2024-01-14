@@ -97,5 +97,10 @@ Teleport(3,344.2373352050781, 387.9965515136719, -51.7148551940918)
 Teleport(3,328.6017761230469, 131.04371643066406, -5.629939079284668)
 Teleport(3,242.7480926513672, -57.748233795166016, -62.42878723144531)
 
+wait(3)
+
+warn('Loading Season Grinder')
+
+
 loadstring(game:HttpGet('https://raw.githubusercontent.com/223Win/da_script_bay/main/MILITARY_TYCOON/Season_grinder.lua'))()
 

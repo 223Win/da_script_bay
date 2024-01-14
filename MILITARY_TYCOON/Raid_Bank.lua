@@ -5,7 +5,7 @@ local bankmission = Bank.BankMission
 local bankmodel = workspace.BankModel
 
 
-
+-- Auto Raid the bank at amazing speeds.
 
 assert(fp,'env functions missing')
 

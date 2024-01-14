@@ -34,7 +34,7 @@ local Bank:Folder = workspace.Bank
 local bankmission = Bank.BankMission
 local bankmodel = workspace.BankModel
 
-local Claim:Part = Bank.Claim 
+local GRE:Part = Bank.Claim 
 
 local MoneyFolder = bankmission.Money
 
@@ -49,13 +49,14 @@ for i,v in pairs(MoneyFolder:GetChildren()) do
 	end
 end
 
-Claim.Position = MainClaimPos
+GRE.Size = Vector3.new(30,30,30)
+GRE.Position = MainClaimPos
 
 function Claim(Main:Part)
 	Teleport(1,Main.Position.X,Main.Position.Y,Main.Position.Z)
 	fp(Main.HackAttachment.ProximityPrompt)
 	task.wait(2.5)
-	Teleport(1,MainClaimPos.X,MainClaimPos.Y,MainClaimPos.Z)
+	Teleport(1.75,MainClaimPos.X,MainClaimPos.Y,MainClaimPos.Z)
 	
 end
 

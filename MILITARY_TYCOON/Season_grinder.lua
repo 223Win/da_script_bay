@@ -50,6 +50,7 @@ for i,v in pairs(MoneyFolder:GetChildren()) do
 end
 
 Claim.Position = MainClaimPos
+Claim.Size = Vector3.new(10,10,10)
 
 function Claim(Main:Part)
 	Teleport(1,Main.Position.X,Main.Position.Y,Main.Position.Z)

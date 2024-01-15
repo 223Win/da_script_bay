@@ -18,7 +18,7 @@ function Rejoin()
 	local JobId = game.JobId 
 	local PlaceId = game.PlaceId
 	game.Players.LocalPlayer:Kick("\nRejoining...")
-	wait(15)
+	wait(20)
 	game:GetService("TeleportService"):Teleport(PlaceId, game.Players.LocalPlayer,{'AUTO_REJOIN_ELITE','ELITE_MILITARY_MAIN','ID:%%#@'})
 end
 

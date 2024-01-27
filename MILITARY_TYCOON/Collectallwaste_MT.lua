@@ -16,8 +16,9 @@ function ServerHop()
 	math.randomseed(math.random(1,231712))
 	qot(game:HttpGet('https://raw.githubusercontent.com/223Win/da_script_bay/main/MILITARY_TYCOON/Collectallwaste_MT.lua'))
 
+	game.Players.LocalPlayer:Kick('Rejoining Do not panic.')
 
-	task.wait(3)
+	task.wait(10)
 	game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId,AllServers[math.random(1,#AllServers)],game.Players.LocalPlayer)
 end
 

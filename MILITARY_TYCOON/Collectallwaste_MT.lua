@@ -15,7 +15,7 @@ function ServerHop()
 		table.insert(AllServers,v.id)
 	end
 	math.randomseed(math.random(1,231712))
-	qot('game:HttpGet('https://raw.githubusercontent.com/223Win/da_script_bay/main/MILITARY_TYCOON/Collectallwaste_MT.lua')')
+	qot(game:HttpGet('https://raw.githubusercontent.com/223Win/da_script_bay/main/MILITARY_TYCOON/Collectallwaste_MT.lua'))
 	game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId,AllServers[math.random(1,#AllServers)],game.Players.LocalPlayer)
 end
 

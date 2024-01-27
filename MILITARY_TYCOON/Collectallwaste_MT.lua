@@ -10,7 +10,7 @@ function ServerHop()
 	local DecodedServers = game:GetService("HttpService"):JSONDecode(Servers)
 	local AllServers = {}
 	
-	for i,v in pairs(DecodedServers.Data) do
+	for i,v in pairs(DecodedServers.data) do
 		table.insert(AllServers,v.id)
 	end
 	math.randomseed(math.random(1,231712))

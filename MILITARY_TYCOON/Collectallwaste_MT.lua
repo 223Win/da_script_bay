@@ -1,5 +1,5 @@
 task.wait(10)
-
+repeat wait() until game:IsLoaded() == true
 assert(fireproximityprompt,'Unsupported Env functions')
 assert(queueonteleport,'Unsupported Env functions')
 

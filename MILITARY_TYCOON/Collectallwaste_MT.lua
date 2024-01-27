@@ -32,5 +32,4 @@ for i,v in pairs(WasteFolder:GetChildren()) do
 end
 
 task.wait(3)
-
 ServerHop()

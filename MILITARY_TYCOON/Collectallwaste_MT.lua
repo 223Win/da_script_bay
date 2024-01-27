@@ -1,4 +1,4 @@
- 
+
 
 assert(fireproximityprompt,'Unsupported Env functions')
 assert(queueonteleport,'Unsupported Env functions')

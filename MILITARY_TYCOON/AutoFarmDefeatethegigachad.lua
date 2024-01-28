@@ -32,7 +32,7 @@ local PlayerConnectionAdd = game.Players.PlayerAdded
 local PlayerConnectionRem = game.Players.PlayerRemoving
 local FastMode = false
 
-warn('Version: 2.0.2')
+warn('Version: 2.0.3')
 
 -- AntiKick test
 
@@ -213,29 +213,36 @@ function Complete_Mission()
 	end
 
 	local GetRPGPos = function():Vector3
-		return workspace.EliteMission3.Build.Model.weapon_crate_lid.Position
+		local e,r = pcall(function()
+			return workspace.EliteMission3.Build.Model.weapon_crate_lid.Position
+		end)
+		return r
 	end
 
 
 	local BreachDoor = function(Stage:number)
-		local Mission = GetMission()
-		local Stages = Mission.Stages
-		local Door = Stages[tostring(Stage)].C4DoorNew
-		local prox = Door.C4.ProximityPrompt
-		fp(prox)
+		pcall(function()
+			local Mission = GetMission()
+			local Stages = Mission.Stages
+			local Door = Stages[tostring(Stage)].C4DoorNew
+			local prox = Door.C4.ProximityPrompt
+			fp(prox)
+		end)
 	end
 
 	local GetDoorPosition = function(Stage:number):Vector3
-		local Mission = GetMission()
-		local Stages = Mission.Stages
-		local Door:Instance = Stages[tostring(Stage)].C4DoorNew
-		local FirstDoorPart = Door:FindFirstChild('Door')
-
-		if FirstDoorPart == nil then
-			return game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-		end
-
-		return FirstDoorPart:FindFirstChild("Door").Position
+		local e,r = pcall(function()
+			local Mission = GetMission()
+			local Stages = Mission.Stages
+			local Door:Instance = Stages[tostring(Stage)].C4DoorNew
+			local FirstDoorPart = Door:FindFirstChild('Door')
+	
+			if FirstDoorPart == nil then
+				return game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+			end
+	
+			return FirstDoorPart:FindFirstChild("Door").Position
+		end)
 	end
 	local tp = function (...)
 

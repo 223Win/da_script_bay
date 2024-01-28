@@ -259,7 +259,7 @@ function Complete_Mission()
 	BreachDoor(3)
 	tp(GetRPGPos())
 	GetRPG()
-	tp(workspace.EliteMission3.Build.ArmoredTrain.PWagon4.Big_suitcase.Position)
+	tp(GetDoorPosition(3))
 	game.Players.LocalPlayer.Character.Torso.Anchored = false
 
 

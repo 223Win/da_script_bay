@@ -32,7 +32,7 @@ local PlayerConnectionAdd = game.Players.PlayerAdded
 local PlayerConnectionRem = game.Players.PlayerRemoving
 local FastMode = false
 
-warn('Version: 2.0.3')
+warn('Version: 2.0.3 -- MAJOR UPDATE (Fully Fixed Script.)')
 
 -- AntiKick test
 
@@ -213,10 +213,7 @@ function Complete_Mission()
 	end
 
 	local GetRPGPos = function():Vector3
-		local e,r = pcall(function()
-			return workspace.EliteMission3.Build.Model.weapon_crate_lid.Position
-		end)
-		return r
+		return workspace.EliteMission3.Build.Model.weapon_crate_lid.Position
 	end
 
 
@@ -231,18 +228,16 @@ function Complete_Mission()
 	end
 
 	local GetDoorPosition = function(Stage:number):Vector3
-		local e,r = pcall(function()
-			local Mission = GetMission()
-			local Stages = Mission.Stages
-			local Door:Instance = Stages[tostring(Stage)].C4DoorNew
-			local FirstDoorPart = Door:FindFirstChild('Door')
-	
-			if FirstDoorPart == nil then
-				return game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-			end
-	
-			return FirstDoorPart:FindFirstChild("Door").Position
-		end)
+		local Mission = GetMission()
+		local Stages = Mission.Stages
+		local Door:Instance = Stages[tostring(Stage)].C4DoorNew
+		local FirstDoorPart = Door:FindFirstChild('Door')
+
+		if FirstDoorPart == nil then
+			return game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+		end
+
+		return FirstDoorPart:FindFirstChild("Door").Position
 	end
 	local tp = function (...)
 
@@ -325,6 +320,7 @@ function Complete_Mission()
 
 
 	local function Attack()
+		Main_Equip()
 		if SniperExists then
 			local SniperPos = Vector3.new(-2051.103759765625, 306.8470153808594, 7218.2216796875)
 			local Target = GetBoss().Body.Position

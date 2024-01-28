@@ -171,7 +171,7 @@ function Complete_Mission()
 	-- Elite Mission Main Script
 
 	repeat wait() until CheckIfMissionIsOnCooldown(3) == true
-	wait(2)
+	wait(3.5)
 	warn('Starting Elite Mission')
 
 	local fp = fireproximityprompt

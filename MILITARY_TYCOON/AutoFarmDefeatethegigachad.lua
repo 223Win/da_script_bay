@@ -1,6 +1,9 @@
 
 -- loadstring(game:HttpGet('https://raw.githubusercontent.com/223Win/da_script_bay/main/MILITARY_TYCOON/AutoFarmDefeatethegigachad.lua'))
 
+
+
+
 if game.PlaceId ~= 7180042682 then return end
 
 -- writefile('militarytycoonautoelitemissions.lua',game:HttpGet('https://raw.githubusercontent.com/223Win/da_script_bay/main/MILITARY_TYCOON/AutoFarmDefeatethegigachad.lua'))
@@ -11,6 +14,7 @@ local PlayerConnectionAdd = game.Players.PlayerAdded
 local PlayerConnectionRem = game.Players.PlayerRemoving
 local FastMode = false
 
+warn('AUTOGRINDER UPDATED TO LATEST VERSION')
 
 -- AntiKick test
 

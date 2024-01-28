@@ -11,6 +11,7 @@ local PlayerConnectionAdd = game.Players.PlayerAdded
 local PlayerConnectionRem = game.Players.PlayerRemoving
 local FastMode = false
 
+warn('Version: 1.2')
 
 -- AntiKick test
 

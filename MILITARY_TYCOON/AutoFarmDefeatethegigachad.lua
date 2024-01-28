@@ -251,7 +251,7 @@ function Complete_Mission()
 	warn('Running Main Script')
 
 
-	GetMission().Stages['4'].BossFight1.Trigger.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+	firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,GetMission().Stages['4'].BossFight1.Trigger:FindFirstChildOfClass("TouchTransmitter"),0)
 	tp(GetDoorPosition(1))
 	BreachDoor(1)
 	tp(GetDoorPosition(2))

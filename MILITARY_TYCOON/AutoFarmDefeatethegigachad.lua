@@ -217,7 +217,14 @@ function Complete_Mission()
 		return FirstDoorPart:FindFirstChild("Door").Position
 	end
 	local tp = function (...)
+
 		local VectorParams = {...}
+		if type(VectorParams[1]) == 'vector' then
+			local VEC = VectorParams[1]
+			VectorParams[1] = VEC.X
+			VectorParams[2] = VEC.Y
+			VectorParams[3] = VEC.Z
+		end
 		local TS = game:GetService("TweenService")
 		local Player = game.Players.LocalPlayer
 		local Character = Player.Character

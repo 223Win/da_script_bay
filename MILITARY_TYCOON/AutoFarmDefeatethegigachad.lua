@@ -11,7 +11,7 @@ local PlayerConnectionAdd = game.Players.PlayerAdded
 local PlayerConnectionRem = game.Players.PlayerRemoving
 local FastMode = false
 
-warn('Version: 1.5')
+warn('Version: 1.6')
 
 -- AntiKick test
 
@@ -251,6 +251,7 @@ function Complete_Mission()
 	warn('Running Main Script')
 
 
+	GetMission().Stages['4'].BossFight1.Trigger.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
 	tp(GetDoorPosition(1))
 	BreachDoor(1)
 	tp(GetDoorPosition(2))
@@ -259,7 +260,7 @@ function Complete_Mission()
 	BreachDoor(3)
 	tp(GetRPGPos())
 	GetRPG()
-	tp(GetDoorPosition(3))
+	tp(workspace.EliteMission3.Build.ArmoredTrain.PWagon4.Big_suitcase.Position)
 	game.Players.LocalPlayer.Character.Torso.Anchored = false
 
 

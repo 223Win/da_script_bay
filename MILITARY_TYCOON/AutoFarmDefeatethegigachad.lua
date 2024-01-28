@@ -1,4 +1,25 @@
-
+FireTouchInterest = function(Part)
+	if Part == nil then
+		return
+	else
+		local Body_P = game.Players.LocalPlayer.Character:FindFirstChild('Left Arm') or game.Players.LocalPlayer.Character:FindFirstChild('LeftLowerArm')
+		if Body_P == nil then
+			return
+		else
+			local Orgin = Part.Position
+			local Collide = Part.CanCollide
+			local Anchored = Part.Anchored
+			task.wait()
+			Part.Anchored = true
+			Part.CanCollide = false
+			Part.Position = Body_P.Position
+			task.wait()
+			repeat task.wait() Part.Position = Orgin until Part.Position == Orgin
+			Part.Anchored = Anchored
+			Part.CanCollide = Collide
+		end
+	end
+end
 -- loadstring(game:HttpGet('https://raw.githubusercontent.com/223Win/da_script_bay/main/MILITARY_TYCOON/AutoFarmDefeatethegigachad.lua'))()
 
 if game.PlaceId ~= 7180042682 then return end
@@ -11,7 +32,7 @@ local PlayerConnectionAdd = game.Players.PlayerAdded
 local PlayerConnectionRem = game.Players.PlayerRemoving
 local FastMode = false
 
-warn('Version: 2.0.1')
+warn('Version: 2.0.2')
 
 -- AntiKick test
 
@@ -261,7 +282,7 @@ function Complete_Mission()
 	GetRPG()
 	tp(workspace.EliteMission3.Build.ArmoredTrain.PWagon4.Big_suitcase.Position)
 	game.Players.LocalPlayer.Character.Torso.Anchored = false
-	firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,GetMission().Stages['4'].BossFight1.Trigger,0)
+	FireTouchInterest(GetMission().Stages['4'].BossFight1.Trigger)
 
 
 

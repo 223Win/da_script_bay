@@ -1,8 +1,5 @@
 
--- loadstring(game:HttpGet('https://raw.githubusercontent.com/223Win/da_script_bay/main/MILITARY_TYCOON/AutoFarmDefeatethegigachad.lua'))
-
-
-
+-- loadstring(game:HttpGet('https://raw.githubusercontent.com/223Win/da_script_bay/main/MILITARY_TYCOON/AutoFarmDefeatethegigachad.lua'))()
 
 if game.PlaceId ~= 7180042682 then return end
 
@@ -14,7 +11,6 @@ local PlayerConnectionAdd = game.Players.PlayerAdded
 local PlayerConnectionRem = game.Players.PlayerRemoving
 local FastMode = false
 
-warn('AUTOGRINDER UPDATED TO LATEST VERSION')
 
 -- AntiKick test
 
@@ -193,7 +189,7 @@ function Complete_Mission()
 	local GetRPG = function()
 		fp(workspace.EliteMission3.Build.Model.weapon_crate_lid.ProximityPrompt)
 	end
-	
+
 	local GetRPGPos = function():Vector3
 		return workspace.EliteMission3.Build.Model.weapon_crate_lid.Position
 	end
@@ -206,15 +202,19 @@ function Complete_Mission()
 		local prox = Door.C4.ProximityPrompt
 		fp(prox)
 	end
-	
+
 	local GetDoorPosition = function(Stage:number):Vector3
 		local Mission = GetMission()
 		local Stages = Mission.Stages
-		local Door = Stages[tostring(Stage)].C4DoorNew
-		local C4 = Door.C4
-		return C4.Position
-	end
+		local Door:Instance = Stages[tostring(Stage)].C4DoorNew
+		local FirstDoorPart = Door:FindFirstChild('Door')
 
+		if FirstDoorPart == nil then
+			return game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+		end
+
+		return FirstDoorPart:FindFirstChild("Door").Position
+	end
 	local tp = function (...)
 		local VectorParams = {...}
 		local TS = game:GetService("TweenService")
@@ -236,6 +236,7 @@ function Complete_Mission()
 			end
 		end
 	end
+
 
 	local SniperExists = CheckForExplosiveSniper()
 

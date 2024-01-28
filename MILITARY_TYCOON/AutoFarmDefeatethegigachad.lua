@@ -175,7 +175,7 @@ function Complete_Mission()
 
 	local fp = fireproximityprompt
 	local GetMission = function()
-		local CurrentMission = Workspace.Mission
+		local CurrentMission = workspace.Mission
 		return CurrentMission
 	end
 	local CheckForExplosiveSniper = function()
@@ -189,7 +189,10 @@ function Complete_Mission()
 	local GetRPG = function()
 		fp(workspace.EliteMission3.Build.Model.weapon_crate_lid.ProximityPrompt)
 	end
-
+	
+	local GetRPGPos = function():Vector3
+		return workspace.EliteMission3.Build.Model.weapon_crate_lid.Position
+	end
 
 
 	local BreachDoor = function(Stage:number)
@@ -198,6 +201,14 @@ function Complete_Mission()
 		local Door = Stages[tostring(Stage)].C4DoorNew
 		local prox = Door.C4.ProximityPrompt
 		fp(prox)
+	end
+	
+	local GetDoorPosition = function(Stage:number):Vector3
+		local Mission = GetMission()
+		local Stages = Mission.Stages
+		local Door = Stages[tostring(Stage)].C4DoorNew
+		local C4 = Door.C4
+		return C4.Position
 	end
 
 	local tp = function (...)
@@ -227,15 +238,15 @@ function Complete_Mission()
 	warn('Running Main Script')
 
 
-	tp(-2499.968994140625, 306.2042236328125, 7209.6298828125)
+	tp(GetDoorPosition(1))
 	BreachDoor(1)
-	tp(-2366.9326171875, 306.2058410644531, 7208.130859375)
+	tp(GetDoorPosition(2))
 	BreachDoor(2)
-	tp(-2141.969482421875, 306.21197509765625, 7210.00244140625)
+	tp(GetDoorPosition(3))
 	BreachDoor(3)
-	tp(-2020.2005615234375, 309.6351318359375, 7200.3408203125)
+	tp(GetRPGPos())
 	GetRPG()
-	tp(-2088.9873046875, 306.2136535644531, 7198.90185546875)
+	tp(workspace.EliteMission3.Build.ArmoredTrain.PWagon4.Big_suitcase.Position)
 	game.Players.LocalPlayer.Character.Torso.Anchored = false
 
 
@@ -301,11 +312,11 @@ function Complete_Mission()
 	repeat wait() until BossAlive == true
 	repeat Attack() until BossAlive == false
 
-	tp(-1901.6082763671875, 306.2123107910156, 7208.41064453125)
+	tp(GetDoorPosition(5))
 	BreachDoor(5)
-	tp(-1680.5286865234375, 306.17913818359375, 7208.6513671875)
+	tp(GetDoorPosition(6))
 	BreachDoor(6)
-	tp(-1836.7493896484375, 306.1868896484375, 7209.41259765625)
+	tp(workspace.EliteMission3.Build.ArmoredTrain.PWagon4.Big_suitcase.Position)
 	game.Players.LocalPlayer.Character.Torso.Anchored = false
 	wait(20)
 end

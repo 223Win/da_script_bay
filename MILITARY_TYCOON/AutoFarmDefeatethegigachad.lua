@@ -11,7 +11,7 @@ local PlayerConnectionAdd = game.Players.PlayerAdded
 local PlayerConnectionRem = game.Players.PlayerRemoving
 local FastMode = false
 
-warn('Version: 1.4')
+warn('Version: 1.5')
 
 -- AntiKick test
 
@@ -171,7 +171,7 @@ function Complete_Mission()
 	-- Elite Mission Main Script
 
 	repeat wait() until CheckIfMissionIsOnCooldown(3) == true
-	wait(5)
+	wait(2)
 	warn('Starting Elite Mission')
 
 	local fp = fireproximityprompt
@@ -229,7 +229,7 @@ function Complete_Mission()
 		local Player = game.Players.LocalPlayer
 		local Character = Player.Character
 		if Character then
-			local info = TweenInfo.new(3,Enum.EasingStyle.Linear)
+			local info = TweenInfo.new(3.6,Enum.EasingStyle.Linear)
 			local goal = {CFrame = CFrame.new(VectorParams[1],VectorParams[2],VectorParams[3])}
 			local error,tween = pcall(function()
 				return TS:Create(Character.HumanoidRootPart,info,goal)

@@ -178,7 +178,7 @@ CheckFastMode()
 warn('WAITING FOR GAME TO LOAD')
 wait(5)
 repeat wait() until game:IsLoaded() == true
-warn("Game loaded checks completed; begining grinder")
+warn("Game loaded checks completed; beginning grinder")
 
 function Complete_Mission()
 	repeat wait() until CheckIfMissionIsOnCooldown(3) == false

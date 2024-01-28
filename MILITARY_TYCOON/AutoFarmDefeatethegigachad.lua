@@ -216,8 +216,8 @@ function Complete_Mission()
 				tween:Play()
 				tween.Completed:Wait()
 				Character.Torso.Anchored = true
-			else
-				return tween
+			else	
+				error(tween,5)
 			end
 		end
 	end

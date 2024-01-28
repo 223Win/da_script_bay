@@ -11,7 +11,7 @@ local PlayerConnectionAdd = game.Players.PlayerAdded
 local PlayerConnectionRem = game.Players.PlayerRemoving
 local FastMode = false
 
-warn('Version: 2')
+warn('Version: 2.0.1')
 
 -- AntiKick test
 
@@ -259,9 +259,9 @@ function Complete_Mission()
 	BreachDoor(3)
 	tp(GetRPGPos())
 	GetRPG()
-	firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,GetMission().Stages['4'].BossFight1.Trigger,0)
 	tp(workspace.EliteMission3.Build.ArmoredTrain.PWagon4.Big_suitcase.Position)
 	game.Players.LocalPlayer.Character.Torso.Anchored = false
+	firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,GetMission().Stages['4'].BossFight1.Trigger,0)
 
 
 

@@ -32,7 +32,7 @@ local PlayerConnectionAdd = game.Players.PlayerAdded
 local PlayerConnectionRem = game.Players.PlayerRemoving
 local FastMode = false
 
-warn('Version: 2.0.3 -- MAJOR UPDATE (Fully Fixed Script.)')
+warn('Version: 2.0.4 -- MAJOR UPDATE (Fully Fixed Script.)')
 
 -- AntiKick test
 
@@ -221,7 +221,7 @@ function Complete_Mission()
 		pcall(function()
 			local Mission = GetMission()
 			local Stages = Mission.Stages
-			local Door = Stages[tostring(Stage)].C4DoorNew
+			local Door = Stages[tostring(Stage)]]:WaitForChild('C4DoorNew')
 			local prox = Door.C4.ProximityPrompt
 			fp(prox)
 		end)
@@ -230,7 +230,7 @@ function Complete_Mission()
 	local GetDoorPosition = function(Stage:number):Vector3
 		local Mission = GetMission()
 		local Stages = Mission.Stages
-		local Door:Instance = Stages[tostring(Stage)].C4DoorNew
+		local Door:Instance = Stages[tostring(Stage)]:WaitForChild('C4DoorNew')
 		local FirstDoorPart = Door:FindFirstChild('Door')
 
 		if FirstDoorPart == nil then

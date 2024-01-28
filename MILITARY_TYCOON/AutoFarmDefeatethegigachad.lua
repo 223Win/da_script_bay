@@ -11,7 +11,7 @@ local PlayerConnectionAdd = game.Players.PlayerAdded
 local PlayerConnectionRem = game.Players.PlayerRemoving
 local FastMode = false
 
-warn('Version: 1.8')
+warn('Version: 1.9')
 
 -- AntiKick test
 
@@ -251,7 +251,7 @@ function Complete_Mission()
 	warn('Running Main Script')
 
 
-	firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,GetMission().Stages['4'].BossFight1.Trigger:FindFirstChildOfClass("TouchTransmitter"),0)
+	firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,GetMission().Stages['4'].BossFight1.Trigger,0)
 	tp(GetDoorPosition(1))
 	BreachDoor(1)
 	tp(GetDoorPosition(2))

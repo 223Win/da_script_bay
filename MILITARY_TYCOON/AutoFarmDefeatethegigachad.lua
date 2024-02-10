@@ -41,6 +41,9 @@ function Rejoin()
 	local PlaceId = game.PlaceId
 	game.Players.LocalPlayer:Kick("\nRejoining...")
 	wait(20)
+	if queueonteleport then
+		queueonteleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/223Win/da_script_bay/main/MILITARY_TYCOON/AutoFarmDefeatethegigachad.lua"))()')
+	end
 	game:GetService("TeleportService"):Teleport(PlaceId, game.Players.LocalPlayer,{'AUTO_REJOIN_ELITE','ELITE_MILITARY_MAIN','ID:%%#@'})
 end
 

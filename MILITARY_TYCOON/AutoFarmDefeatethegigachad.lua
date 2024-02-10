@@ -30,9 +30,10 @@ local PlayerMax = 1
 local BossAlive = true
 local PlayerConnectionAdd = game.Players.PlayerAdded
 local PlayerConnectionRem = game.Players.PlayerRemoving
+local FastModeOverride = {true,false}
 local FastMode = false
 
-warn('Version: 2.0.7 -- MAJOR UPDATE (Fully Fixed Script.)')
+warn('Version: 2.1 -- MAJOR UPDATE (Fully Fixed Script.)')
 
 -- AntiKick test
 
@@ -62,9 +63,17 @@ HookKick()
 
 function CheckFastMode()
 	if #game:GetService("Players"):GetPlayers() == 1 then
-		FastMode = true
+		if FastModeOverride[1] == true then
+			FastMode = FastModeOverride[2]
+		else
+			FastMode = true
+		end
 	else
-		FastMode = false
+		if FastModeOverride[1] == true then
+			FastMode = FastModeOverride[2]
+		else
+			FastMode = false
+		end
 	end
 end
 

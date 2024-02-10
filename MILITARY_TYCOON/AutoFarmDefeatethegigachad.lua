@@ -32,7 +32,7 @@ local PlayerConnectionAdd = game.Players.PlayerAdded
 local PlayerConnectionRem = game.Players.PlayerRemoving
 local FastMode = false
 
-warn('Version: 2.0.6 -- MAJOR UPDATE (Fully Fixed Script.)')
+warn('Version: 2.0.7 -- MAJOR UPDATE (Fully Fixed Script.)')
 
 -- AntiKick test
 
@@ -239,7 +239,9 @@ function Complete_Mission()
 		if FirstDoorPart == nil then
 			return game.Players.LocalPlayer.Character.HumanoidRootPart.Position
 		end
-
+		if FirstDoorPart:FindFirstChild("Door") == nil then
+			return FirstDoorPart.Parent.C4.Position
+		end
 		return FirstDoorPart:FindFirstChild("Door").Position
 	end
 	local tp = function (...)
@@ -353,7 +355,9 @@ function Complete_Mission()
 	repeat wait() until BossAlive == true
 	repeat Attack() until BossAlive == false
 
-	tp(GetDoorPosition(5))
+	if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - GetDoorPosition(5)).magnitude > 30 then
+		tp(GetDoorPosition(5))
+	end
 	BreachDoor(5)
 	tp(GetDoorPosition(6))
 	BreachDoor(6)

@@ -32,7 +32,7 @@ local PlayerConnectionAdd = game.Players.PlayerAdded
 local PlayerConnectionRem = game.Players.PlayerRemoving
 local FastMode = false
 
-warn('Version: 2.0.4 -- MAJOR UPDATE (Fully Fixed Script.)')
+warn('Version: 2.0.5 -- MAJOR UPDATE (Fully Fixed Script.)')
 
 -- AntiKick test
 

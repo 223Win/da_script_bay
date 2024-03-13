@@ -361,6 +361,9 @@ function Complete_Mission()
 		Main_Equip()
 		if SniperExists then
 			local SniperPos = Vector3.new(-2051.103759765625, 306.8470153808594, 7218.2216796875)
+			if GetBoss().Body == nil then
+				return
+			end
 			local Target = GetBoss().Body.Position
 			local args = {
 				[1] = {SniperPos},
@@ -374,6 +377,9 @@ function Complete_Mission()
 			game:GetService("ReplicatedStorage").Events.ReloadEvent:FireServer()
 			wait(3.55)
 		else
+			if GetBoss().Body == nil then
+				return
+			end
 			local Target = GetBoss().Body.Position
 			local args = {
 				[1] = CFrame.new(Target.X,Target.Y,Target.Z) * CFrame.Angles(-0, 0, -0)

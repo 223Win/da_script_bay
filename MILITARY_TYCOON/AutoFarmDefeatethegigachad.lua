@@ -57,7 +57,7 @@ local PlayerConnectionRem = game.Players.PlayerRemoving
 local FastModeOverride = {true,false}
 local FastMode = false
 
-warn('Version: 2.2 -- MAJOR UPDATE (Fully Fixed Script.)')
+warn('Version: 2.5 -- MAJOR UPDATE (Fully Fixed Script.)')
 SetupANTIIDLE()
 -- AntiKick test
 

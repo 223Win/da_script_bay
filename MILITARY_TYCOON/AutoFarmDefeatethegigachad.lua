@@ -57,7 +57,7 @@ local PlayerConnectionRem = game.Players.PlayerRemoving
 local FastModeOverride = {true,false}
 local FastMode = false
 
-warn('Version: 2.5 -- MAJOR UPDATE (Fully Fixed Script.)')
+warn('Version: 2.6 (Fully Fixed Script.)')
 SetupANTIIDLE()
 -- AntiKick test
 
@@ -359,36 +359,39 @@ function Complete_Mission()
 
 	local function Attack()
 		Main_Equip()
-		if SniperExists then
-			local SniperPos = Vector3.new(-2051.103759765625, 306.8470153808594, 7218.2216796875)
-			if GetBoss().Body == nil then
-				return
+		pcall(function()
+			if SniperExists then
+				local SniperPos = Vector3.new(-2051.103759765625, 306.8470153808594, 7218.2216796875)
+				if GetBoss().Body == nil then
+					return
+				end
+				local Target = GetBoss().Body.Position
+				local args = {
+					[1] = {SniperPos},
+					[2] = {Target},
+					[3] = {GetBoss().Body},
+					[4] = {Target},
+					[5] = {Vector3.new(-0.9868752956390381, 0, 0.1614837646484375)},
+					[6] = {Enum.Material.Plastic}
+				}
+				game:GetService("ReplicatedStorage").Events.ShootEvent:FireServer(unpack(args))
+				game:GetService("ReplicatedStorage").Events.ReloadEvent:FireServer()
+				wait(3.55)
+			else
+				if GetBoss().Body == nil then
+					return
+				end
+				local Target = GetBoss().Body.Position
+				local args = {
+					[1] = CFrame.new(Target.X,Target.Y,Target.Z) * CFrame.Angles(-0, 0, -0)
+				}
+	
+				game:GetService("ReplicatedStorage").Events.RPG:FireServer(unpack(args))
+				game:GetService("ReplicatedStorage").Events.RPGReload:FireServer()
+				wait(3.1)
 			end
-			local Target = GetBoss().Body.Position
-			local args = {
-				[1] = {SniperPos},
-				[2] = {Target},
-				[3] = {GetBoss().Body},
-				[4] = {Target},
-				[5] = {Vector3.new(-0.9868752956390381, 0, 0.1614837646484375)},
-				[6] = {Enum.Material.Plastic}
-			}
-			game:GetService("ReplicatedStorage").Events.ShootEvent:FireServer(unpack(args))
-			game:GetService("ReplicatedStorage").Events.ReloadEvent:FireServer()
-			wait(3.55)
-		else
-			if GetBoss().Body == nil then
-				return
-			end
-			local Target = GetBoss().Body.Position
-			local args = {
-				[1] = CFrame.new(Target.X,Target.Y,Target.Z) * CFrame.Angles(-0, 0, -0)
-			}
 
-			game:GetService("ReplicatedStorage").Events.RPG:FireServer(unpack(args))
-			game:GetService("ReplicatedStorage").Events.RPGReload:FireServer()
-			wait(3.1)
-		end
+		end)
 	end
 	Main_Equip()
 	repeat wait() until BossAlive == true

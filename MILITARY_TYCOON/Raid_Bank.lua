@@ -100,9 +100,9 @@ end
 --warn(CheckOnCooldown())
 
 
-Teleport(3,GetPos(Workspace.Bank.BankMission.Stages["1"].C4Door.C4.Position))
+Teleport(3.5,GetPos(Workspace.Bank.BankMission.Stages["1"].C4Door.C4.Position))
 BreachDoor(1)
-Teleport(3,GetPos(Workspace.Bank.BankMission.Stages["2"].Elevator.ActivateMain.Position))
+Teleport(3.5,GetPos(Workspace.Bank.BankMission.Stages["2"].Elevator.ActivateMain.Position))
 EnableElevator()
 
 

@@ -34,13 +34,24 @@ function Teleport(Speed,...)
 	end
 end
 
-local fp = fireproximityprompt
+local fp = function(ProximityPrompt:ProximityPrompt)
+	local old = ProximityPrompt.MaxActivationDistance
+	local old_1 = ProximityPrompt.HoldDuration
+	task.wait()
+	ProximityPrompt.MaxActivationDistance = 500
+	ProximityPrompt.HoldDuration = 0
+	ProximityPrompt:InputHoldBegin()
+	task.wait()
+	ProximityPrompt:InputHoldEnd()
+	ProximityPrompt.MaxActivationDistance = old
+	ProximityPrompt.HoldDuration = old_1
+end
 assert(fp,'does not have env functions')
 
 
 
 
-local MainClaimPos = Vector3.new(228.2662811279297, -61.3765869140625, -77.86969757080078)
+local MainClaimPos = Workspace.Bank.BankMission.Stages["3"].BankVault.Door.WorldPivot.Position
 
 local Bank:Folder = workspace.Bank
 local bankmission = Bank.BankMission

@@ -1,4 +1,15 @@
-local fp = fireproximityprompt
+local fp = function(ProximityPrompt:ProximityPrompt)
+	local old = ProximityPrompt.MaxActivationDistance
+	local old_1 = ProximityPrompt.HoldDuration
+	task.wait()
+	ProximityPrompt.MaxActivationDistance = 500
+	ProximityPrompt.HoldDuration = 0
+	ProximityPrompt:InputHoldBegin()
+	task.wait()
+	ProximityPrompt:InputHoldEnd()
+	ProximityPrompt.MaxActivationDistance = old
+	ProximityPrompt.HoldDuration = old_1
+end
 warn(fp)
 local Bank:Folder = workspace.Bank
 local bankmission = Bank.BankMission
@@ -67,7 +78,9 @@ function BreachDoor(Stage:number)
 	end)
 end
 
-
+function GetPos(pos)
+	return pos.X,pos.Y,pos.Z
+end
 
 function CheckOnCooldown():boolean
 	local s,r = pcall(function()
@@ -87,15 +100,11 @@ end
 --warn(CheckOnCooldown())
 
 
-Teleport(3,239.07069396972656, 131.02659606933594, -80.15452575683594)
+Teleport(3,GetPos(Workspace.Bank.BankMission.Stages["1"].C4Door.C4))
 BreachDoor(1)
-Teleport(3,328.6017761230469, 131.04371643066406, -5.629939079284668)
-Teleport(3,344.2373352050781, 387.9965515136719, -51.7148551940918)
-Teleport(2,337.6779479980469, 387.9965515136719, -99.09307098388672)
+Teleport(3,GetPos(Workspace.Bank.BankMission.Stages["2"].Elevator.ActivateMain))
 EnableElevator()
-Teleport(3,344.2373352050781, 387.9965515136719, -51.7148551940918)
-Teleport(3,328.6017761230469, 131.04371643066406, -5.629939079284668)
-Teleport(3,242.7480926513672, -57.748233795166016, -62.42878723144531)
+
 
 wait(3)
 

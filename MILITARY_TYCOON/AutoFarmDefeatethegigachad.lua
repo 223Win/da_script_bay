@@ -231,7 +231,18 @@ function Complete_Mission()
 	wait(3.5)
 	warn('Starting Elite Mission')
 
-	local fp = fireproximityprompt
+	local fp = function(ProximityPrompt:ProximityPrompt)
+		local old = ProximityPrompt.MaxActivationDistance
+		local old_1 = ProximityPrompt.HoldDuration
+		task.wait()
+		ProximityPrompt.MaxActivationDistance = 500
+		ProximityPrompt.HoldDuration = 0
+		ProximityPrompt:InputHoldBegin()
+		task.wait()
+		ProximityPrompt:InputHoldEnd()
+		ProximityPrompt.MaxActivationDistance = old
+		ProximityPrompt.HoldDuration = old_1
+	end
 	local GetMission = function()
 		local CurrentMission = workspace.Mission
 		return CurrentMission

@@ -57,7 +57,7 @@ local PlayerConnectionRem = game.Players.PlayerRemoving
 local FastModeOverride = {true,false}
 local FastMode = false
 
-warn('Version: 2.7.1 --SOLARA SUPPORT')
+warn('Version: 2.7.2 --SOLARA SUPPORT')
 SetupANTIIDLE()
 -- AntiKick test
 

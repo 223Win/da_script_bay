@@ -234,7 +234,9 @@ function Complete_Mission()
 	local fp = function(ProximityPrompt:ProximityPrompt)
 		local _o = ProximityPrompt.HoldDuration
 		ProximityPrompt.HoldDuration = 0
+		task.wait()
 		fireproximityprompt(ProximityPrompt,1)
+		task.wait(0.1)
 		ProximityPrompt.HoldDuration = _o
 	end
 	local GetMission = function()

@@ -57,7 +57,7 @@ local PlayerConnectionRem = game.Players.PlayerRemoving
 local FastModeOverride = {true,false}
 local FastMode = false
 
-warn('Version: 2.6 (Fully Fixed Script.)')
+warn('Version: 2.7 --SOLARA SUPPORT')
 SetupANTIIDLE()
 -- AntiKick test
 
@@ -232,16 +232,7 @@ function Complete_Mission()
 	warn('Starting Elite Mission')
 
 	local fp = function(ProximityPrompt:ProximityPrompt)
-		local old = ProximityPrompt.MaxActivationDistance
-		local old_1 = ProximityPrompt.HoldDuration
-		task.wait()
-		ProximityPrompt.MaxActivationDistance = 500
-		ProximityPrompt.HoldDuration = 0
-		ProximityPrompt:InputHoldBegin()
-		task.wait()
-		ProximityPrompt:InputHoldEnd()
-		ProximityPrompt.MaxActivationDistance = old
-		ProximityPrompt.HoldDuration = old_1
+		fireproximityprompt(ProximityPrompt,1)
 	end
 	local GetMission = function()
 		local CurrentMission = workspace.Mission
